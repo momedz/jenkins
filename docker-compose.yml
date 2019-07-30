@@ -1,0 +1,18 @@
+version: '3.3'
+
+volumes: 
+  jenkins-data:
+
+services:
+  jenkins:
+    build: . 
+    restart: always
+    container_name: jenkins
+    environment:
+      - JENKINS_OPTS="--prefix=/jenkins"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - jenkins-data:/var/jenkins_home
+    ports:
+      - 8080:8080
+      - 50000:50000
